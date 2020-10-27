@@ -2,8 +2,10 @@ package com.jaehyun.webproject.web.dto;
 
 import com.jaehyun.webproject.domain.posts.Posts;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class PostsResponseDto {
     private Long id;
     private String title;
