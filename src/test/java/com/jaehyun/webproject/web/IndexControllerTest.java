@@ -19,11 +19,22 @@ public class IndexControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void index_page_loding() throws Exception {
+    public void index_page_loading() throws Exception {
         // when
         String body = this.restTemplate.getForObject("/", String.class);
 
         // then
-        assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
+        assertThat(body).contains("테스트용 게시판~~");
     }
+
+    @Test
+    public void post_save_page_loading() throws Exception {
+        // when
+        String body = this.restTemplate.getForObject("/posts/save", String.class);
+
+        // then
+        assertThat(body).contains("게시글 등록");
+    }
+
+
 }
