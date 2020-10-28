@@ -25,6 +25,44 @@ public class PostsRepositoryTest {
     }
 
     @Test
+    public void get_all_posts(){
+        // given
+        String title = "테스트 게시글";
+        String content = "테스트 본문";
+
+        postsRepository.save(
+                Posts.builder()
+                        .title(title)
+                        .content(content)
+                        .author("vljh246v@gmail.com")
+                        .build());
+
+        String title2 = "테스트 게시글2";
+        String content2 = "테스트 본문2";
+
+        postsRepository.save(
+                Posts.builder()
+                        .title(title2)
+                        .content(content2)
+                        .author("vljh246v@gmail.com")
+                        .build());
+
+        // when
+        List<Posts> posts = postsRepository.findAllDesc();
+
+        // then
+        Posts post = posts.get(1);
+
+        assertThat(post.getTitle()).isEqualTo(title);
+        assertThat(post.getContent()).isEqualTo(content);
+
+        Posts post2 = posts.get(0);
+
+        assertThat(post2.getTitle()).isEqualTo(title2);
+        assertThat(post2.getContent()).isEqualTo(content2);
+    }
+
+    @Test
     public void get_posts(){
         // given
         String title = "테스트 게시글";
