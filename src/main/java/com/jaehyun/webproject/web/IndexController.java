@@ -1,5 +1,6 @@
 package com.jaehyun.webproject.web;
 
+import com.jaehyun.webproject.config.auth.dto.SessionUser;
 import com.jaehyun.webproject.service.posts.PostsService;
 import com.jaehyun.webproject.web.dto.PostsResponseDto;
 import lombok.NoArgsConstructor;
@@ -9,16 +10,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+import java.util.Objects;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts", postsService.findAllDesc());
-        return "index";
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+    if (Objects.nonNull(user)){
+        model.addAttribute("userName", user.getName());
+    }
+    return "index";
     }
 
     @GetMapping("/posts/save")
