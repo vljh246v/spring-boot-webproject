@@ -24,7 +24,7 @@ before_deploy:
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_EKY
+  secret_access_key: $AWS_SECRET_KEY
   bucket: demo-board-build
   region: ap-northeast-2
   skip_cleanup: true
