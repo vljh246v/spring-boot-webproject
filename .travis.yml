@@ -17,7 +17,6 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - chmod +x gradlew
   - zip -r spring-boot-webproject *
   - mkdir -p deploy
   - mv spring-boot-webproject.zip deploy/spring-boot-webproject.zip
