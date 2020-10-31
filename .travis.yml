@@ -22,15 +22,26 @@ before_deploy:
   - mv spring-boot-webproject.zip deploy/spring-boot-webproject.zip
 
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: demo-board-build
-  region: ap-northeast-2
-  skip_cleanup: true
-  acl: private
-  local_dir: deploy
-  wait-until-deployed: true
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: demo-board-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: demo-board-build
+    key: spring-boot-webproject.zip
+    bundle_type: zip
+    application: spring-boot-webproject
+    deployment_group: demo-board-group
+    region: ap-northeast-2
+    wait-until-deployed: true
 
 
 
