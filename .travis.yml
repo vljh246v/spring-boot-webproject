@@ -38,7 +38,7 @@ deploy:
     bucket: demo-board-build
     key: spring-boot-webproject.zip
     bundle_type: zip
-    application: spring-boot-webproject
+    application: demo-board
     deployment_group: demo-board-group
     region: ap-northeast-2
     wait-until-deployed: true
