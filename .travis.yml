@@ -8,7 +8,20 @@ branches:
 
 before_install:
   - chmod +x gradlew
+  - zip -r spring-boot-webproject *
+  - mkdir -p deploy
+  - mv spring-boot-webproject.zip deploy/spring-boot-webproject.zip
 
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_EKY
+  bucket: demo-board-build
+  region: ap-northeast-2
+  skip_cleanup: true
+  acl: private
+  local_dir: deploy
+  wati-until-deployed: true
 # Travis CI 서버의 Home
 cache:
   directories:
